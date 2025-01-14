@@ -1,25 +1,23 @@
 const express = require('express')
 
+const {
+    getMessages,
+    getMessage,
+    createMessage,
+    deleteMessage,
+    updateMessage
+} = require('../controllers/messageController')
+
 const router = express.Router()
 
-router.get('/', (req, res)=>{
-    res.json({mssg: 'GET all message'})
-})
+router.get('/', getMessages)
 
-router.get('/:id', (req, res)=>{
-    res.json({mssg: 'GET a single message'})
-})
+router.get('/:id', getMessage)
 
-router.post('/', (req, res)=>{
-    res.json({mssg: 'POST a new message'})
-})
+router.post('/', createMessage)
 
-router.delete('/:id', (req, res)=>{
-    res.json({mssg: 'DELETE a message'})
-})
+router.delete('/:id', deleteMessage)
 
-router.patch('/:id', (req, res)=>{
-    res.json({mssg: 'UPDATE a message'})
-})
+router.patch('/:id', updateMessage)
 
 module.exports = router

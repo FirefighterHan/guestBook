@@ -3,13 +3,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const messageSchema = new Schema({
-    title: {
+    message: {
         type: String,
         required: true
     },
-    reps: {
-        type: Number,
+    category: {
+        type: String,
         required: true
-    },
-    
-})
+    }
+}, { timestamps: true})
+
+module.exports = mongoose.model('Message', messageSchema)
