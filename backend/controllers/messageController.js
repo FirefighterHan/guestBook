@@ -31,6 +31,18 @@ const getMessage = async (req, res) => {
 const createMessage = async(req, res) => {
     const {message, category} = req.body
 
+    let emptyFields = []
+
+    if (!message) {
+        emptyFields.push('message')
+    }
+    if (!category) {
+        emptyFields.push('category')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    }
+
     // add doc to db
     try {
         const messagePost = await Message.create({message, category})
