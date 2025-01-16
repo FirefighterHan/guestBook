@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useMessageContext } from '../hooks/useMessageContext'
+
 
 const MessageForm = () => {
+    const  {dispatch} = useMessageContext()
     const  [message, setMessage] = useState('')
     const  [category, setCategory] = useState('')
     const  [error, setError] = useState(null)
@@ -28,7 +31,9 @@ const MessageForm = () => {
             setMessage('')
             setCategory('')
             setError(null)
+            dispatch({type: 'CREATE_MESSAGE', payload: json})
             console.log('new Message added', json)
+            
         }
     }
 

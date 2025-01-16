@@ -1,4 +1,5 @@
-import {useEffect, useState } from 'react'
+import {useEffect} from 'react'
+import { useMessageContext } from '../hooks/useMessageContext'
 
 // components
 import MessageDetails from '../components/MessageDetails'
@@ -6,7 +7,7 @@ import MessageForm from '../components/MessageForm'
 
 
 const Home = () => {
-    const [messages, setMessages] = useState(null)
+    const {messages, dispatch} = useMessageContext()
 
     useEffect(() => {
         const fetchMessage = async () => {
@@ -14,12 +15,12 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setMessages(json)
+                dispatch({type: 'SET_MESSAGES', payload: json})
             }
         }
 
         fetchMessage()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">
