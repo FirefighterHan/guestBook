@@ -12,6 +12,10 @@ export const messageReducer = (state, action) => {
             return {
                 messages: [action.payload, ...state.messages]
             }
+        case 'DELETE_MESSAGE':
+            return {
+                messages: state.messages.filter((w) => w._id !== action.payload._id)
+            }
         default:
             return state
     }

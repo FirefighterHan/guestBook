@@ -7,6 +7,7 @@ const MessageForm = () => {
     const  [message, setMessage] = useState('')
     const  [category, setCategory] = useState('')
     const  [error, setError] = useState(null)
+    const  [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -25,12 +26,14 @@ const MessageForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
 
         }
         if (response.ok) {
             setMessage('')
             setCategory('')
             setError(null)
+            setEmptyFields([])
             dispatch({type: 'CREATE_MESSAGE', payload: json})
             console.log('new Message added', json)
             
@@ -46,6 +49,7 @@ const MessageForm = () => {
                 type="text"
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
+                className={emptyFields.includes('message') ? 'error' : ''}
                 />
             
             <label>category:</label>
@@ -53,6 +57,7 @@ const MessageForm = () => {
                 type="text"
                 onChange={(e) => setCategory(e.target.value)}
                 value={category}
+                className={emptyFields.includes('category') ? 'error' : ''}
                 />
             
             <button>Send Message</button>
