@@ -7,8 +7,12 @@ const {
     deleteMessage,
     updateMessage
 } = require('../controllers/messageController')
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+
+//require auth for all message routes
+router.use(requireAuth)
 
 router.get('/', getMessages)
 
