@@ -29,7 +29,7 @@ const MessageDetails = ({message}) => {
     }
     return (
         <div className="message-details">
-            <h4>Message Details:</h4>
+            <h4>{user.email}</h4>
             <p><strong>Message: </strong>{message.message}</p>
             <p><strong>Category: </strong>{message.category}</p>
             <p><strong>Date & Time: </strong>{formatDistanceToNow(new Date(message.createdAt), {addSuffix: true})}</p>

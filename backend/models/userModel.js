@@ -5,6 +5,10 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    username: {
+        type: String,
+        default: ''
+    },
     email: {
         type: String,
         required: true,
@@ -13,6 +17,14 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    bio: {
+        type: String,
+        default: ''
+    },
+    profpic: {
+        type: String,
+        default: ''
     }
 })
 

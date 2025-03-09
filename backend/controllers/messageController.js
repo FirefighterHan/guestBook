@@ -22,7 +22,7 @@ const getMessage = async (req, res) => {
     const message = await Message.findById(id)
 
     if (!message) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such message"})
     }
 
     res.status(200).json(message)
@@ -66,7 +66,7 @@ const deleteMessage = async (req, res) => {
     const message = await Message.findOneAndDelete({_id: id})
 
     if (!message) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such message"})
     }
 
     res.status(200).json(message)
@@ -85,7 +85,7 @@ const updateMessage = async (req, res) => {
     })
 
     if (!message) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such message"})
     }
 
     res.status(200).json(message)
