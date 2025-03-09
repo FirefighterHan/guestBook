@@ -4,7 +4,9 @@ const mongoose = require('mongoose')
 
 // get all message
 const getMessages = async (req, res) => {
-    const message = await Message.find({}).sort({createdAt: -1})
+
+    const user_id = req.user._id
+    const message = await Message.find({user_id}).sort({createdAt: -1})
     res.status(200).json(message)
 }
 
@@ -20,7 +22,7 @@ const getMessage = async (req, res) => {
     const message = await Message.findById(id)
 
     if (!message) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such message"})
     }
 
     res.status(200).json(message)
@@ -45,7 +47,8 @@ const createMessage = async(req, res) => {
 
     // add doc to db
     try {
-        const messagePost = await Message.create({message, category})
+        const user_id = req.user._id
+        const messagePost = await Message.create({message, category, user_id})
         res.status(200).json(messagePost)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -63,7 +66,7 @@ const deleteMessage = async (req, res) => {
     const message = await Message.findOneAndDelete({_id: id})
 
     if (!message) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such message"})
     }
 
     res.status(200).json(message)
@@ -82,7 +85,7 @@ const updateMessage = async (req, res) => {
     })
 
     if (!message) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such message"})
     }
 
     res.status(200).json(message)
